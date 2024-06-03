@@ -4,7 +4,7 @@ setup(
     name='sgszenity',
     version='0.1.0',
     description='Simple dialog with Python and Gtk',
-    url='https://github.com/SoftGeekRo/sgzenity.git',
+    url='https://github.com/SoftGeekRO/sgzenity.git',
     author='SoulRaven',
     author_email='constantin.zaharia@sgsolar.ro',
     license='GPLv3',
