@@ -7,7 +7,10 @@ setup(
     url='https://github.com/SoftGeekRO/sgzenity.git',
     author='SoulRaven',
     author_email='constantin.zaharia@sgsolar.ro',
-    license='GPLv3',
+    license="LICENSE.md",
+    readme="README.md",
+    repository="https://github.com/soulraven/roundbox",
+    documentation="https://soulraven.github.io/roundbox/",
     packages=['sgszenity'],
     zip_safe=False
 )

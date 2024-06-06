@@ -5,23 +5,19 @@ http://badge.fury.io/py/sgzenity
 :target: http://sgzenity.readthedocs.io/en/latest/?badge=latest
 :alt: Documentation Status
 
-SGZenity
-******
+# SGZenity
 
-SGZenity is a library for python which was inspired by Zenity. When you write
-scripts,
-you can use SGZenity to create simple dialogs that interact graphically with the
-user.
+SGZenity is a library for python which was inspired by Zenity.
 
-Requirements
-============
+When you write scripts, you can use SGZenity to create simple dialogs that interact graphically with the user.
+
+## Requirements
 
 * Python 3
 * GTK+4
 * python3-gi
 
-Installation
-============
+## Installation
 
 Install using pip :
 
@@ -37,14 +33,14 @@ $ cd ./sgzenity
 $ python setup.py install
 ```
 
-Example
-=======
+## Example
 
 Simple dialog:
 
 ```python
-from sgzenity import calendar
-result = calendar(title="Awesome Calendar",text="Your birthday ?")
+from src.sgzenity import calendar
+
+result = calendar(title="Awesome Calendar", text="Your birthday ?")
 print(result)
 ```
 This code show a calendar dialog :
@@ -59,8 +55,7 @@ $ python test.py
 $ (year=2017, month=6, day=4)
 ```
 
-API
-===
+## API
 
 ```python
 sgzenity.sgzenity.message(title='', text='', width=330, height=120, timeout=None)

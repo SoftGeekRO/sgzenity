@@ -1,0 +1,114 @@
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+name = "sgzenity"
+version = "0.1.0"
+description = "sgzentry is a library for python which was inspired by Zenity. When you write scripts, you can use sgzentry to create simple dialogs that interact graphically with the user."
+homepage="https://github.com/SoftGeekRO/sgzenity"
+repository="https://github.com/SoftGeekRO/sgzenity.git"
+documentation="https://github.com/SoftGeekRO/sgzenity/blob/main/README.md"
+authors = [
+    "Zaharia Constantin <constantin.zaharia@sgsolar.ro>"
+]
+maintainers = []
+license = "GPL-3.0-or-later"
+readme = "README.md"
+keywords=[
+    'zenity',
+    'python3',
+    'poetry',
+    'dialog',
+    'GTK+3'
+]
+classifiers=[
+    "License :: OSI Approved :: GNU Lesser General Public License v3 (LGPLv3)",
+    "Operating System :: OS Independent",
+    "Topic :: Software Development :: Libraries",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14"
+]
+packages=[
+    { include="sgzenity", from="src" }
+]
+include=[
+    "CHANGELOG.md"
+]
+
+[tool.poetry.dependencies]
+python = ">=3.10,<4.0"
+watchdog = ">=4.0.0; python_version >= 3.10"
+colorama = ">=0.4.6; python_version >= 3.10"
+slugify = "^0.0.1"
+PyGObject = "^3.48.2"
+
+[tool.poetry.dev-dependencies]
+isort = "^5.13.2"
+black = "^24.4.2"
+pytest = "^8.2.2"
+pytest-cookies = "^0.7.0"
+tox = "^4.15.1"
+toml = "^0.10.2"
+coverage = "^7.5.3"
+
+[tool.poetry.extras]
+lint = ["black", "isort"]
+test = ["pytest", "pytest-cookies", "tox"]
+
+[tool.poetry.plugins]
+
+[tool.poetry.scripts]
+
+[tool.poetry.urls]
+"Source" = "https://github.com/soulraven/roundbox"
+"Issues" = "https://github.com/soulraven/roundbox/issues"
+"Discussions" = "https://github.com/soulraven/roundbox/discussions"
+"Documentation" = "https://soulraven.github.io/roundbox/"
+"Releases" = "https://soulraven.github.io/roundbox/releases"
+
+[tool.black]
+line_length = 88
+target_version = ['py310']
+skip-string-normalization = true
+include = '\.pyi?$'
+exclude = '''
+(
+  /(
+      \.eggs         # exclude a few common directories in the
+    | \.git          # root of the project
+    | \.github
+    | \.hg
+    | \.mypy_cache
+    | \.tox
+    | \.venv
+    | \notebooks
+    | .ipynb_checkpoints
+    | __pycache__
+    | data
+    | logs
+    | _build
+    | buck-out
+    | build
+    | dist
+    | snapshots
+  )/
+)
+'''
+
+[tool.isort]
+py_version = 310
+profile = "black"
+
+[tool.flake8]
+ignore = ['E231', 'E241']
+per-file-ignores = [
+    '__init__.py:F401',
+]
+max-line-length = 88
+count = true
