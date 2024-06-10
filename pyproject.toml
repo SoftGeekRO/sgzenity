@@ -4,7 +4,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "sgzenity"
-version = "1.0.4"
+version = "1.0.5"
 description = "sgzentry is a library for python which was inspired by Zenity. When you write scripts, you can use sgzentry to create simple dialogs that interact graphically with the user."
 homepage="https://github.com/SoftGeekRO/sgzenity"
 repository="https://github.com/SoftGeekRO/sgzenity.git"
