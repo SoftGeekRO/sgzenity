@@ -1,8 +1,8 @@
 #  -*- coding: utf-8 -*-
 import os
-import pytest
-
 from pathlib import Path
+
+import pytest
 
 
 def file_contains_text(file: Path, text: str) -> bool:
