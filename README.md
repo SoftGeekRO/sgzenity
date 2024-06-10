@@ -104,7 +104,7 @@ sgzenity.sgzenity.question(title='', text='', width=330, height=120, timeout=Non
 >* **width** (*int*) – window width
 >* **height** (*int*) – window height
 >* **timeout** (*int*) – close the window after n seconds
-
+>
 >_Returns_: The answer as a boolean
 >
 >_Return type_: bool
