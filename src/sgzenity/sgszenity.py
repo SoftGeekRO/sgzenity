@@ -413,9 +413,7 @@ def _simple_dialog(dialog_type, text, title, width, height, timeout):
     return dialog.response
 
 
-def message(
-    title="", text="", width=DEFAULT_WIDTH, height=DEFAULT_HEIGHT, timeout=None
-):
+def message(title="", text="", width=DEFAULT_WIDTH, height=DEFAULT_HEIGHT, timeout=None):
     """Display a simple message
     :param text: text inside the window
     :type text: str
@@ -448,9 +446,7 @@ def error(title="", text="", width=DEFAULT_WIDTH, height=DEFAULT_HEIGHT, timeout
     return _simple_dialog(Gtk.MessageType.ERROR, text, title, width, height, timeout)
 
 
-def warning(
-    title="", text="", width=DEFAULT_WIDTH, height=DEFAULT_HEIGHT, timeout=None
-):
+def warning(title="", text="", width=DEFAULT_WIDTH, height=DEFAULT_HEIGHT, timeout=None):
     """Display a simple warning
 
     :param text: text inside the window
@@ -467,9 +463,7 @@ def warning(
     return _simple_dialog(Gtk.MessageType.WARNING, text, title, width, height, timeout)
 
 
-def question(
-    title="", text="", width=DEFAULT_WIDTH, height=DEFAULT_HEIGHT, timeout=None
-):
+def question(title="", text="", width=DEFAULT_WIDTH, height=DEFAULT_HEIGHT, timeout=None):
     """Display a question, possible answer are yes/no.
 
     :param text: text inside the window
@@ -495,14 +489,7 @@ def question(
     return None
 
 
-def entry(
-    text="",
-    placeholder="",
-    title="",
-    width=DEFAULT_WIDTH,
-    height=DEFAULT_HEIGHT,
-    timeout=None,
-):
+def entry(text="", placeholder="", title="", width=DEFAULT_WIDTH, height=DEFAULT_HEIGHT, timeout=None, ):
     """Display a text input
 
     :param text: text inside the window
@@ -525,14 +512,7 @@ def entry(
     return dialog.response
 
 
-def password(
-    text="",
-    placeholder="",
-    title="",
-    width=DEFAULT_WIDTH,
-    height=DEFAULT_HEIGHT,
-    timeout=None,
-):
+def password(text="", placeholder="", title="", width=DEFAULT_WIDTH, height=DEFAULT_HEIGHT, timeout=None, ):
     """Display a text input with hidden characters
 
     :param text: text inside the window
@@ -555,16 +535,7 @@ def password(
     return dialog.response
 
 
-def sglist(
-    columns,
-    items,
-    print_columns=None,
-    text="",
-    title="",
-    width=DEFAULT_WIDTH,
-    height=ZLIST_HEIGHT,
-    timeout=None,
-):
+def sglist(columns, items, print_columns=None, text="", title="", width=DEFAULT_WIDTH, height=ZLIST_HEIGHT, timeout=None):
     """Display a list of values
 
     :param columns: a list of columns name
@@ -591,17 +562,8 @@ def sglist(
     return dialog.response
 
 
-def file_selection(
-    multiple=False,
-    directory=False,
-    save=False,
-    confirm_overwrite=False,
-    filename=None,
-    title="",
-    width=DEFAULT_WIDTH,
-    height=DEFAULT_HEIGHT,
-    timeout=None,
-):
+def file_selection(multiple=False, directory=False, save=False, confirm_overwrite=False, filename=None, title="",
+                   width=DEFAULT_WIDTH, height=DEFAULT_HEIGHT, timeout=None):
     """Open a file selection window
 
     :param multiple: allow multiple file selection
@@ -642,16 +604,8 @@ def file_selection(
     return dialog.response
 
 
-def calendar(
-    text="",
-    day=None,
-    month=None,
-    year=None,
-    title="",
-    width=DEFAULT_WIDTH,
-    height=DEFAULT_HEIGHT,
-    timeout=None,
-):
+def calendar(text="", day=None, month=None, year=None, title="", width=DEFAULT_WIDTH, height=DEFAULT_HEIGHT,
+             timeout=None):
     """Display a calendar
 
     :param text: text inside the window
@@ -678,14 +632,8 @@ def calendar(
     return dialog.response
 
 
-def color_selection(
-    show_palette=False,
-    opacity_control=False,
-    title="",
-    width=DEFAULT_WIDTH,
-    height=DEFAULT_HEIGHT,
-    timeout=None,
-):
+def color_selection(show_palette=False, opacity_control=False, title="", width=DEFAULT_WIDTH,height=DEFAULT_HEIGHT,
+                    timeout=None):
     """Display a color selection dialog
 
     :param show_palette: hide/show the palette with preselected colors
@@ -710,18 +658,8 @@ def color_selection(
     return dialog.response
 
 
-def scale(
-    text="",
-    value=0,
-    min=0,
-    max=100,
-    step=1,
-    draw_value=True,
-    title="",
-    width=DEFAULT_WIDTH,
-    height=DEFAULT_HEIGHT,
-    timeout=None,
-):
+def scale(text="", value=0, min=0, max=100, step=1, draw_value=True, title="", width=DEFAULT_WIDTH, height=DEFAULT_HEIGHT,
+          timeout=None):
     """Select a number with a range widget
 
     :param text: text inside window
