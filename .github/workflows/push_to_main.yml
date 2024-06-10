@@ -1,4 +1,4 @@
-name: merge-to-main
+name: 'Merge2Main'
 on:
   push:
     branches:

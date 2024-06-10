@@ -1,9 +1,8 @@
-https://badge.fury.io/py/sgzenity.png
-http://badge.fury.io/py/sgzenity
+[https://badge.fury.io/py/sgzenity.png](http://badge.fury.io/py/sgzenity)
 
-.. image:: https://readthedocs.org/projects/sgzenity/badge/?version=latest
-:target: http://sgzenity.readthedocs.io/en/latest/?badge=latest
-:alt: Documentation Status
+[![Merge2Main](https://github.com/SoftGeekRO/sgzenity/actions/workflows/push_to_main.yml/badge.svg?event=push)](https://github.com/SoftGeekRO/sgzenity/actions/workflows/push_to_main.yml)
+[![Publish Python 🐍 distribution 📦 to PyPI and TestPyPI](https://github.com/SoftGeekRO/sgzenity/actions/workflows/publish_to_pypi.yml/badge.svg?event=release)](https://github.com/SoftGeekRO/sgzenity/actions/workflows/publish_to_pypi.yml)
+
 
 # SGZenity
 
@@ -19,7 +18,7 @@ When you write scripts, you can use SGZenity to create simple dialogs that inter
 
 ## Installation
 
-Install using pip :
+Install using pip:
 
 ```bash
 $ pip install sgzenity
@@ -45,8 +44,7 @@ print(result)
 ```
 This code show a calendar dialog :
 
-.. image:: docs/images/screen.png
-:align: center
+![dialog_01](docs/img/screen_01.png)
 
 And display the result :
 
@@ -67,13 +65,13 @@ Parameters:
 
 * **text** (*str*) – text inside the window
 
-      * **title** (*str*) – title of the window
+* **title** (*str*) – title of the window
 
-      * **width** (*int*) – window width
+* **width** (*int*) – window width
 
-      * **height** (*int*) – window height
+* **height** (*int*) – window height
 
-      * **timeout** (*int*) – close the window after n seconds
+* **timeout** (*int*) – close the window after n seconds
 
 ```python
 sgzenity.sgzenity.error(title='', text='', width=330, height=120, timeout=None)
@@ -85,13 +83,13 @@ Parameters:
 
 * **text** (*str*) – text inside the window
 
-      * **title** (*str*) – title of the window
+* **title** (*str*) – title of the window
 
-      * **width** (*int*) – window width
+* **width** (*int*) – window width
 
-      * **height** (*int*) – window height
+* **height** (*int*) – window height
 
-      * **timeout** (*int*) – close the window after n seconds
+* **timeout** (*int*) – close the window after n seconds
 
 ```python
 sgzenity.sgzenity.warning(title='', text='', width=330, height=120, timeout=None)
@@ -103,13 +101,13 @@ Parameters:
 
 * **text** (*str*) – text inside the window
 
-      * **title** (*str*) – title of the window
+* **title** (*str*) – title of the window
 
-      * **width** (*int*) – window width
+* **width** (*int*) – window width
 
-      * **height** (*int*) – window height
+* **height** (*int*) – window height
 
-      * **timeout** (*int*) – close the window after n seconds
+* **timeout** (*int*) – close the window after n seconds
 
 ```python
 sgzenity.sgzenity.question(title='', text='', width=330, height=120, timeout=None)
@@ -121,13 +119,13 @@ Parameters:
 
 * **text** (*str*) – text inside the window
 
-      * **title** (*str*) – title of the window
+* **title** (*str*) – title of the window
 
-      * **width** (*int*) – window width
+* **width** (*int*) – window width
 
-      * **height** (*int*) – window height
+* **height** (*int*) – window height
 
-      * **timeout** (*int*) – close the window after n seconds
+* **timeout** (*int*) – close the window after n seconds
 
 Returns:
 The answer as a boolean
@@ -145,15 +143,15 @@ Parameters:
 
 * **text** (*str*) – text inside the window
 
-      * **placeholder** (*str*) – placeholder for the input
+* **placeholder** (*str*) – placeholder for the input
 
-      * **title** (*str*) – title of the window
+* **title** (*str*) – title of the window
 
-      * **width** (*int*) – window width
+* **width** (*int*) – window width
 
-      * **height** (*int*) – window height
+* **height** (*int*) – window height
 
-      * **timeout** (*int*) – close the window after n seconds
+* **timeout** (*int*) – close the window after n seconds
 
 Returns:
 The content of the text input
@@ -171,15 +169,15 @@ Parameters:
 
 * **text** (*str*) – text inside the window
 
-      * **placeholder** (*str*) – placeholder for the input
+* **placeholder** (*str*) – placeholder for the input
 
-      * **title** (*str*) – title of the window
+* **title** (*str*) – title of the window
 
-      * **width** (*int*) – window width
+* **width** (*int*) – window width
 
-      * **height** (*int*) – window height
+* **height** (*int*) – window height
 
-      * **timeout** (*int*) – close the window after n seconds
+* **timeout** (*int*) – close the window after n seconds
 
 Returns:
 The content of the text input
@@ -196,20 +194,20 @@ Parameters:
 
 * **columns** (*list of strings*) – a list of columns name
 
-      * **items** (*list of strings*) – a list of values
+* **items** (*list of strings*) – a list of values
 
-      * **print_columns** (*int** (**None if all the columns**)*) –
-        index of a column (return just the values from this column)
+* **print_columns** (*int** (**None if all the columns**)*) –
+  index of a column (return just the values from this column)
 
-      * **text** (*str*) – text inside the window
+* **text** (*str*) – text inside the window
 
-      * **title** (*str*) – title of the window
+* **title** (*str*) – title of the window
 
-      * **width** (*int*) – window width
+* **width** (*int*) – window width
 
-      * **height** (*int*) – window height
+* **height** (*int*) – window height
 
-      * **timeout** (*int*) – close the window after n seconds
+* **timeout** (*int*) – close the window after n seconds
 
 Returns:
 A row of values from the table
@@ -226,24 +224,24 @@ Parameters:
 
 * **multiple** (*bool*) – allow multiple file selection
 
-      * **directory** (*bool*) – only directory selection
+* **directory** (*bool*) – only directory selection
 
-      * **save** (*bool*) – save mode
+* **save** (*bool*) – save mode
 
-      * **confirm_overwrite** (*bool*) – confirm when a file is
-        overwritten
+* **confirm_overwrite** (*bool*) – confirm when a file is
+  overwritten
 
-      * **filename** (*str*) – placeholder for the filename
+* **filename** (*str*) – placeholder for the filename
 
-      * **text** (*str*) – text inside the window
+* **text** (*str*) – text inside the window
 
-      * **title** (*str*) – title of the window
+* **title** (*str*) – title of the window
 
-      * **width** (*int*) – window width
+* **width** (*int*) – window width
 
-      * **height** (*int*) – window height
+* **height** (*int*) – window height
 
-      * **timeout** (*int*) – close the window after n seconds
+* **timeout** (*int*) – close the window after n seconds
 
 Returns:
 path of files selected.
@@ -261,19 +259,19 @@ Parameters:
 
 * **text** (*str*) – text inside the window
 
-      * **day** (*int*) – default day
+* **day** (*int*) – default day
 
-      * **month** (*int*) – default month
+* **month** (*int*) – default month
 
-      * **text** – text inside the window
+* **text** – text inside the window
 
-      * **title** (*str*) – title of the window
+* **title** (*str*) – title of the window
 
-      * **width** (*int*) – window width
+* **width** (*int*) – window width
 
-      * **height** (*int*) – window height
+* **height** (*int*) – window height
 
-      * **timeout** (*int*) – close the window after n seconds
+* **timeout** (*int*) – close the window after n seconds
 
 Returns:
 (year, month, day)
@@ -292,15 +290,15 @@ Parameters:
 * **show_palette** (*bool*) – hide/show the palette with
   preselected colors
 
-      * **opacity_control** (*bool*) – allow to control opacity
+* **opacity_control** (*bool*) – allow to control opacity
 
-      * **title** (*str*) – title of the window
+* **title** (*str*) – title of the window
 
-      * **width** (*int*) – window width
+* **width** (*int*) – window width
 
-      * **height** (*int*) – window height
+* **height** (*int*) – window height
 
-      * **timeout** (*int*) – close the window after n seconds
+* **timeout** (*int*) – close the window after n seconds
 
 Returns:
 the color selected by the user
@@ -318,23 +316,23 @@ Parameters:
 
 * **text** (*str*) – text inside window
 
-      * **value** (*int*) – current value
+* **value** (*int*) – current value
 
-      * **min** (*int*) – minimum value
+* **min** (*int*) – minimum value
 
-      * **max** (*int*) – maximum value
+* **max** (*int*) – maximum value
 
-      * **step** (*int*) – incrementation value
+* **step** (*int*) – incrementation value
 
-      * **draw_value** (*bool*) – hide/show cursor value
+* **draw_value** (*bool*) – hide/show cursor value
 
-      * **title** (*str*) – title of the window
+* **title** (*str*) – title of the window
 
-      * **width** (*int*) – window width
+* **width** (*int*) – window width
 
-      * **height** (*int*) – window height
+* **height** (*int*) – window height
 
-      * **timeout** (*int*) – close the window after n seconds
+* **timeout** (*int*) – close the window after n seconds
 
 Returns:
 The value selected by the user
