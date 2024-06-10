@@ -4,7 +4,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "sgzenity"
-version = "0.1.5"
+version = "0.1.6"
 description = "sgzentry is a library for python which was inspired by Zenity. When you write scripts, you can use sgzentry to create simple dialogs that interact graphically with the user."
 homepage="https://github.com/SoftGeekRO/sgzenity"
 repository="https://github.com/SoftGeekRO/sgzenity.git"
@@ -60,11 +60,11 @@ coverage = ">=7.5.3"
 [tool.poetry.scripts]
 
 [tool.poetry.urls]
-"Source" = "https://github.com/soulraven/roundbox"
-"Issues" = "https://github.com/soulraven/roundbox/issues"
-"Discussions" = "https://github.com/soulraven/roundbox/discussions"
-"Documentation" = "https://soulraven.github.io/roundbox/"
-"Releases" = "https://soulraven.github.io/roundbox/releases"
+"Source" = "https://github.com/SoftGeekRO/sgzenity/"
+"Issues" = "https://github.com/SoftGeekRO/sgzenity/issues"
+"Discussions" = "https://github.com/SoftGeekRO/sgzenity/discussions"
+"Documentation" = "https://github.com/SoftGeekRO/sgzenity/"
+"Releases" = "https://github.com/SoftGeekRO/sgzenity/releases"
 
 [tool.black]
 line_length = 88
