@@ -12,5 +12,5 @@ setup(
     repository="https://github.com/soulraven/roundbox",
     documentation="https://soulraven.github.io/roundbox/",
     packages=['sgszenity'],
-    zip_safe=False
+    zip_safe=False,
 )

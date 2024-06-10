@@ -43,23 +43,17 @@ include=[
 
 [tool.poetry.dependencies]
 python = ">=3.10,<4.0"
-watchdog = ">=4.0.0; python_version >= 3.10"
-colorama = ">=0.4.6; python_version >= 3.10"
-slugify = "^0.0.1"
-PyGObject = "^3.48.2"
 
-[tool.poetry.dev-dependencies]
-isort = "^5.13.2"
-black = "^24.4.2"
-pytest = "^8.2.2"
-pytest-cookies = "^0.7.0"
-tox = "^4.15.1"
-toml = "^0.10.2"
-coverage = "^7.5.3"
+[tool.poetry.group.lint.dependencies]
+black = ">=24.4.2"
+isort = ">=5.13.2"
 
-[tool.poetry.extras]
-lint = ["black", "isort"]
-test = ["pytest", "pytest-cookies", "tox"]
+[tool.poetry.group.test.dependencies]
+pytest = ">=8.2.2"
+pytest-cookies = ">=0.7.0"
+tox = ">=4.15.1"
+toml = ">=0.10.2"
+coverage = ">=7.5.3"
 
 [tool.poetry.plugins]
 

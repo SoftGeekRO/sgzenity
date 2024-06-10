@@ -14,7 +14,7 @@ When you write scripts, you can use SGZenity to create simple dialogs that inter
 ## Requirements
 
 * Python 3
-* GTK+4
+* [GTK+4](https://docs.gtk.org/)
 * python3-gi
 
 ## Installation

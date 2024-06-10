@@ -2,7 +2,7 @@
 # -*- coding:utf-8 -*-
 
 import gi
-from gi.repository import Gtk, GLib
+from gi.repository import GLib, Gtk
 
 gi.require_version('Gtk', '4.0')
 
@@ -26,11 +26,7 @@ class Base(object):
         self.dialog.resize(self.width, self.height)
         self.dialog.set_border_width(5)
         if self.timeout:
-            GLib.timeout_add_seconds(
-                self.timeout,
-                self._destroy,
-                self.dialog
-            )
+            GLib.timeout_add_seconds(self.timeout, self._destroy, self.dialog)
 
         if self.title:
             self.dialog.set_title(self.title)
@@ -70,7 +66,7 @@ class SGSimpleDialog(Base):
             flags=0,
             type=self.dialog_type,
             buttons=buttons,
-            message_format=None
+            message_format=None,
         )
         self.init_dialog()
 
@@ -101,15 +97,10 @@ class SGEntry(Base):
             self.entry_widget.set_text(self.placeholder)
 
         self.dialog.add_buttons(
-            Gtk.STOCK_CANCEL,
-            Gtk.ResponseType.CANCEL,
-            Gtk.STOCK_OK,
-            Gtk.ResponseType.OK
+            Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL, Gtk.STOCK_OK, Gtk.ResponseType.OK
         )
         self.dialog.set_default(
-            self.dialog.get_widget_for_response(
-                Gtk.ResponseType.OK
-            )
+            self.dialog.get_widget_for_response(Gtk.ResponseType.OK)
         )
 
     def set_response(self, response):
@@ -143,8 +134,7 @@ class SGSGEntryPassword(SGEntry):
 
         # Password icon
         icon = Gtk.Image()
-        icon.set_from_stock(Gtk.STOCK_DIALOG_AUTHENTICATION,
-                            Gtk.IconSize.DIALOG)
+        icon.set_from_stock(Gtk.STOCK_DIALOG_AUTHENTICATION, Gtk.IconSize.DIALOG)
         icon.show()
         hb_up.add(icon)
         # Text display on the dialog
@@ -186,7 +176,7 @@ class SGList(Base):
         # example: [1,2,3,4,5] -> (1,2,3), (4,5,'')
         def group(items, nb_cols):
             for i in range(0, len(items), nb_cols):
-                group = items[i:i + nb_cols]
+                group = items[i : i + nb_cols]
                 if len(group) == nb_cols:
                     yield (tuple(group))
                 else:
@@ -226,11 +216,12 @@ class SGList(Base):
         vb = self.dialog.get_content_area()
         vb.set_spacing(10)
         vb.add(hb)
-        self.dialog.add_buttons(Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
-                                Gtk.STOCK_OK, Gtk.ResponseType.OK)
+        self.dialog.add_buttons(
+            Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL, Gtk.STOCK_OK, Gtk.ResponseType.OK
+        )
         self.dialog.set_default(
-            self.dialog.get_widget_for_response(
-                Gtk.ResponseType.OK))
+            self.dialog.get_widget_for_response(Gtk.ResponseType.OK)
+        )
 
     def _on_item_selected(self, selection):
         model, treeiter = selection.get_selected()
@@ -253,8 +244,9 @@ class SGList(Base):
 
 
 class SGFileSelection(Base):
-    def __init__(self, multiple, directory, save, confirm_overwrite,
-                 filename, *args, **kwargs):
+    def __init__(
+        self, multiple, directory, save, confirm_overwrite, filename, *args, **kwargs
+    ):
         super(SGFileSelection, self).__init__(*args, **kwargs)
         self.multiple = multiple
         self.directory = directory
@@ -266,7 +258,8 @@ class SGFileSelection(Base):
                 Gtk.STOCK_CANCEL,
                 Gtk.ResponseType.CANCEL,
                 Gtk.STOCK_OK,
-                Gtk.ResponseType.OK)
+                Gtk.ResponseType.OK,
+            )
         )
         self.init_dialog()
 
@@ -328,19 +321,16 @@ class SGCalendar(Base):
             self.calendar.set_year = self.year
 
         self.calendar.show()
-        self.calendar.connect('day-selected-double-click', self._day_selected,
-                              None)
+        self.calendar.connect('day-selected-double-click', self._day_selected, None)
         vb.add(self.calendar)
 
         self.dialog.get_content_area().add(vb)
         self.dialog.add_buttons(
-            Gtk.STOCK_CANCEL,
-            Gtk.ResponseType.CANCEL,
-            Gtk.STOCK_OK,
-            Gtk.ResponseType.OK)
+            Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL, Gtk.STOCK_OK, Gtk.ResponseType.OK
+        )
         self.dialog.set_default(
-            self.dialog.get_widget_for_response(
-                Gtk.ResponseType.OK))
+            self.dialog.get_widget_for_response(Gtk.ResponseType.OK)
+        )
 
     def _day_selected(self, calendar, event):
         self.dialog.response(Gtk.ResponseType.OK)
@@ -351,14 +341,13 @@ class SGCalendar(Base):
 
 
 class SGScale(Base):
-    def __init__(self, text, value, min, max, step, draw_value, *args,
-                 **kwargs):
+    def __init__(self, text, value, min, max, step, draw_value, *args, **kwargs):
         super(SGScale, self).__init__(*args, **kwargs)
         self.text = text
         adjustment = Gtk.Adjustment(value, min, max, step, 0, 0)
         self.scale = Gtk.Scale(
-            orientation=Gtk.Orientation.HORIZONTAL,
-            adjustment=adjustment)
+            orientation=Gtk.Orientation.HORIZONTAL, adjustment=adjustment
+        )
         self.scale.set_draw_value(draw_value)
         self.dialog = Gtk.Dialog()
         self.init_dialog()
@@ -391,10 +380,11 @@ class SGScale(Base):
             Gtk.STOCK_CANCEL,
             Gtk.ResponseType.CANCEL,
             Gtk.STOCK_OK,
-            Gtk.ResponseType.OK, )
+            Gtk.ResponseType.OK,
+        )
         self.dialog.set_default(
-            self.dialog.get_widget_for_response(
-                Gtk.ResponseType.OK))
+            self.dialog.get_widget_for_response(Gtk.ResponseType.OK)
+        )
 
     def set_response(self, response):
         if response == Gtk.ResponseType.OK:
@@ -407,13 +397,14 @@ class SGColorSelection(Base):
         self.dialog = Gtk.ColorSelectionDialog()
         self.dialog.get_color_selection().set_has_palette(show_palette)
         self.opacity_control = opacity_control
-        self.dialog.get_color_selection().set_has_opacity_control(
-            opacity_control)
+        self.dialog.get_color_selection().set_has_opacity_control(opacity_control)
         self.init_dialog()
 
     def set_response(self, response):
         if response == Gtk.ResponseType.OK:
-            self.response = self.dialog.get_color_selection().get_current_rgba().to_string()
+            self.response = (
+                self.dialog.get_color_selection().get_current_rgba().to_string()
+            )
 
 
 def _simple_dialog(dialog_type, text, title, width, height, timeout):
@@ -422,9 +413,10 @@ def _simple_dialog(dialog_type, text, title, width, height, timeout):
     return dialog.response
 
 
-def message(title="", text="", width=DEFAULT_WIDTH, height=DEFAULT_HEIGHT,
-            timeout=None):
-    """ Display a simple message
+def message(
+    title="", text="", width=DEFAULT_WIDTH, height=DEFAULT_HEIGHT, timeout=None
+):
+    """Display a simple message
     :param text: text inside the window
     :type text: str
     :param title: title of the window
@@ -436,32 +428,11 @@ def message(title="", text="", width=DEFAULT_WIDTH, height=DEFAULT_HEIGHT,
     :param timeout: close the window after n seconds
     :type timeout: int
     """
-    return _simple_dialog(Gtk.MessageType.INFO,
-                          text, title, width, height, timeout)
+    return _simple_dialog(Gtk.MessageType.INFO, text, title, width, height, timeout)
 
 
-def error(title="", text="", width=DEFAULT_WIDTH, height=DEFAULT_HEIGHT,
-          timeout=None):
-    """ Display a simple error
-
-    :param text: text inside the window
-    :type text: str
-    :param title: title of the window
-    :type title: str
-    :param width: window width
-    :type width: int
-    :param height: window height
-    :type height: int
-    :param timeout: close the window after n seconds
-    :type timeout: int
-    """
-    return _simple_dialog(Gtk.MessageType.ERROR, text, title, width, height,
-                          timeout)
-
-
-def warning(title="", text="", width=DEFAULT_WIDTH, height=DEFAULT_HEIGHT,
-            timeout=None):
-    """ Display a simple warning
+def error(title="", text="", width=DEFAULT_WIDTH, height=DEFAULT_HEIGHT, timeout=None):
+    """Display a simple error
 
     :param text: text inside the window
     :type text: str
@@ -474,13 +445,32 @@ def warning(title="", text="", width=DEFAULT_WIDTH, height=DEFAULT_HEIGHT,
     :param timeout: close the window after n seconds
     :type timeout: int
     """
-    return _simple_dialog(Gtk.MessageType.WARNING, text, title, width, height,
-                          timeout)
+    return _simple_dialog(Gtk.MessageType.ERROR, text, title, width, height, timeout)
 
 
-def question(title="", text="", width=DEFAULT_WIDTH, height=DEFAULT_HEIGHT,
-             timeout=None):
-    """ Display a question, possible answer are yes/no.
+def warning(
+    title="", text="", width=DEFAULT_WIDTH, height=DEFAULT_HEIGHT, timeout=None
+):
+    """Display a simple warning
+
+    :param text: text inside the window
+    :type text: str
+    :param title: title of the window
+    :type title: str
+    :param width: window width
+    :type width: int
+    :param height: window height
+    :type height: int
+    :param timeout: close the window after n seconds
+    :type timeout: int
+    """
+    return _simple_dialog(Gtk.MessageType.WARNING, text, title, width, height, timeout)
+
+
+def question(
+    title="", text="", width=DEFAULT_WIDTH, height=DEFAULT_HEIGHT, timeout=None
+):
+    """Display a question, possible answer are yes/no.
 
     :param text: text inside the window
     :type text: str
@@ -495,8 +485,9 @@ def question(title="", text="", width=DEFAULT_WIDTH, height=DEFAULT_HEIGHT,
     :return: The answer as a boolean
     :rtype: bool
     """
-    response = _simple_dialog(Gtk.MessageType.QUESTION, text, title, width,
-                              height, timeout)
+    response = _simple_dialog(
+        Gtk.MessageType.QUESTION, text, title, width, height, timeout
+    )
     if response == Gtk.ResponseType.YES:
         return True
     elif response == Gtk.ResponseType.NO:
@@ -504,9 +495,15 @@ def question(title="", text="", width=DEFAULT_WIDTH, height=DEFAULT_HEIGHT,
     return None
 
 
-def entry(text="", placeholder="", title="", width=DEFAULT_WIDTH,
-          height=DEFAULT_HEIGHT, timeout=None):
-    """ Display a text input
+def entry(
+    text="",
+    placeholder="",
+    title="",
+    width=DEFAULT_WIDTH,
+    height=DEFAULT_HEIGHT,
+    timeout=None,
+):
+    """Display a text input
 
     :param text: text inside the window
     :type text: str
@@ -528,9 +525,15 @@ def entry(text="", placeholder="", title="", width=DEFAULT_WIDTH,
     return dialog.response
 
 
-def password(text="", placeholder="", title="", width=DEFAULT_WIDTH,
-             height=DEFAULT_HEIGHT, timeout=None):
-    """ Display a text input with hidden characters
+def password(
+    text="",
+    placeholder="",
+    title="",
+    width=DEFAULT_WIDTH,
+    height=DEFAULT_HEIGHT,
+    timeout=None,
+):
+    """Display a text input with hidden characters
 
     :param text: text inside the window
     :type text: str
@@ -552,10 +555,17 @@ def password(text="", placeholder="", title="", width=DEFAULT_WIDTH,
     return dialog.response
 
 
-def sglist(columns, items, print_columns=None, text="", title="",
-           width=DEFAULT_WIDTH,
-           height=ZLIST_HEIGHT, timeout=None):
-    """ Display a list of values
+def sglist(
+    columns,
+    items,
+    print_columns=None,
+    text="",
+    title="",
+    width=DEFAULT_WIDTH,
+    height=ZLIST_HEIGHT,
+    timeout=None,
+):
+    """Display a list of values
 
     :param columns: a list of columns name
     :type columns: list of strings
@@ -576,17 +586,23 @@ def sglist(columns, items, print_columns=None, text="", title="",
     :return: A row of values from the table
     :rtype: list
     """
-    dialog = SGList(columns, items, print_columns, text, title, width, height,
-                    timeout)
+    dialog = SGList(columns, items, print_columns, text, title, width, height, timeout)
     dialog.run()
     return dialog.response
 
 
-def file_selection(multiple=False, directory=False, save=False,
-                   confirm_overwrite=False, filename=None,
-                   title="", width=DEFAULT_WIDTH,
-                   height=DEFAULT_HEIGHT, timeout=None):
-    """ Open a file selection window
+def file_selection(
+    multiple=False,
+    directory=False,
+    save=False,
+    confirm_overwrite=False,
+    filename=None,
+    title="",
+    width=DEFAULT_WIDTH,
+    height=DEFAULT_HEIGHT,
+    timeout=None,
+):
+    """Open a file selection window
 
     :param multiple: allow multiple file selection
     :type multiple: bool
@@ -611,16 +627,32 @@ def file_selection(multiple=False, directory=False, save=False,
     :return: path of files selected.
     :rtype: string or list if multiple enabled
     """
-    dialog = SGFileSelection(multiple, directory, save,
-                             confirm_overwrite, filename,
-                             title, width, height, timeout)
+    dialog = SGFileSelection(
+        multiple,
+        directory,
+        save,
+        confirm_overwrite,
+        filename,
+        title,
+        width,
+        height,
+        timeout,
+    )
     dialog.run()
     return dialog.response
 
 
-def calendar(text="", day=None, month=None, year=None, title="",
-             width=DEFAULT_WIDTH, height=DEFAULT_HEIGHT, timeout=None):
-    """ Display a calendar
+def calendar(
+    text="",
+    day=None,
+    month=None,
+    year=None,
+    title="",
+    width=DEFAULT_WIDTH,
+    height=DEFAULT_HEIGHT,
+    timeout=None,
+):
+    """Display a calendar
 
     :param text: text inside the window
     :type text: str
@@ -641,15 +673,20 @@ def calendar(text="", day=None, month=None, year=None, title="",
     :return: (year, month, day)
     :rtype: tuple
     """
-    dialog = SGCalendar(text, day, month, year,
-                        title, width, height, timeout)
+    dialog = SGCalendar(text, day, month, year, title, width, height, timeout)
     dialog.run()
     return dialog.response
 
 
-def color_selection(show_palette=False, opacity_control=False, title="",
-                    width=DEFAULT_WIDTH, height=DEFAULT_HEIGHT, timeout=None):
-    """ Display a color selection dialog
+def color_selection(
+    show_palette=False,
+    opacity_control=False,
+    title="",
+    width=DEFAULT_WIDTH,
+    height=DEFAULT_HEIGHT,
+    timeout=None,
+):
+    """Display a color selection dialog
 
     :param show_palette: hide/show the palette with preselected colors
     :type show_palette: bool
@@ -666,16 +703,26 @@ def color_selection(show_palette=False, opacity_control=False, title="",
     :return: the color selected by the user
     :rtype: str
     """
-    dialog = SGColorSelection(show_palette, opacity_control, title, width,
-                              height,
-                              timeout)
+    dialog = SGColorSelection(
+        show_palette, opacity_control, title, width, height, timeout
+    )
     dialog.run()
     return dialog.response
 
 
-def scale(text="", value=0, min=0, max=100, step=1, draw_value=True, title="",
-          width=DEFAULT_WIDTH, height=DEFAULT_HEIGHT, timeout=None):
-    """ Select a number with a range widget
+def scale(
+    text="",
+    value=0,
+    min=0,
+    max=100,
+    step=1,
+    draw_value=True,
+    title="",
+    width=DEFAULT_WIDTH,
+    height=DEFAULT_HEIGHT,
+    timeout=None,
+):
+    """Select a number with a range widget
 
     :param text: text inside window
     :type text: str
@@ -700,7 +747,8 @@ def scale(text="", value=0, min=0, max=100, step=1, draw_value=True, title="",
     :return: The value selected by the user
     :rtype: float
     """
-    dialog = SGScale(text, value, min, max, step,
-                     draw_value, title, width, height, timeout)
+    dialog = SGScale(
+        text, value, min, max, step, draw_value, title, width, height, timeout
+    )
     dialog.run()
     return dialog.response
