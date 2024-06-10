@@ -176,7 +176,7 @@ class SGList(Base):
         # example: [1,2,3,4,5] -> (1,2,3), (4,5,'')
         def group(items, nb_cols):
             for i in range(0, len(items), nb_cols):
-                group = items[i:i + nb_cols]
+                group = items[i : i + nb_cols]
                 if len(group) == nb_cols:
                     yield (tuple(group))
                 else:
