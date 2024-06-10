@@ -2,9 +2,10 @@
 # -*- coding:utf-8 -*-
 
 import gi
-from gi.repository import GLib, Gtk
 
 gi.require_version('Gtk', '4.0')
+
+from gi.repository import GLib, Gtk
 
 DEFAULT_WIDTH = 330
 DEFAULT_HEIGHT = 120
