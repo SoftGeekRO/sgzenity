@@ -55,10 +55,10 @@ $ (year=2017, month=6, day=4)
 
 ## API
 
+### Simple message
 ```python
-sgzenity.sgzenity.message(title='', text='', width=330, height=120, timeout=None)
+message(title='', text='', width=330, height=120, timeout=None)
 ```
-
 >Display a simple message
 > 
 >Parameters:
@@ -68,8 +68,10 @@ sgzenity.sgzenity.message(title='', text='', width=330, height=120, timeout=None
 >* **height** (*int*) – window height
 >* **timeout** (*int*) – close the window after n seconds
 
+### Error
+
 ```python
-sgzenity.sgzenity.error(title='', text='', width=330, height=120, timeout=None)
+error(title='', text='', width=330, height=120, timeout=None)
 ```
 
 >Display a simple error
@@ -81,8 +83,9 @@ sgzenity.sgzenity.error(title='', text='', width=330, height=120, timeout=None)
 >* **height** (*int*) – window height
 >* **timeout** (*int*) – close the window after n seconds
 
+### Warning
 ```python
-sgzenity.sgzenity.warning(title='', text='', width=330, height=120, timeout=None)
+warning(title='', text='', width=330, height=120, timeout=None)
 ```
 >Display a simple warning
 >
@@ -93,8 +96,9 @@ sgzenity.sgzenity.warning(title='', text='', width=330, height=120, timeout=None
 >* **height** (*int*) – window height
 >* **timeout** (*int*) – close the window after n seconds
 
+### Question
 ```python
-sgzenity.sgzenity.question(title='', text='', width=330, height=120, timeout=None)
+question(title='', text='', width=330, height=120, timeout=None)
 ```
 >Display a question, possible answer are yes/no.
 >
@@ -109,8 +113,41 @@ sgzenity.sgzenity.question(title='', text='', width=330, height=120, timeout=Non
 >
 >_Return type_: bool
 
+### Progress Bar
 ```python
-sgzenity.sgzenity.entry(text='', placeholder='', title='', width=330, height=120, timeout=None)
+progress_bar(title, text, pulse_mode, callback)
+```
+
+> Display a text input
+>
+>Parameters:
+>* **title** (*str*) – Title of the progress window
+>* **text** (*str*) – Text that will be present on top of the progress bar
+>* **pulse_mode** (*bool*) – Character of the progress bar, pulse of progress based on the callback returns values from 0.0 to 1
+>* **callback** (*int*) – callback function for control the progress bar. Returns a value between 0.0 and 1
+
+
+### Demo
+```python
+def callback_progress_bar(fraction=None):
+    global counter
+    counter += 0.01
+    if counter <= _max:
+        return counter
+    return True
+
+def demo_progress_bar():
+    progress = progress_bar(
+        "DEMO TITLE", "DEMO TEXT", False, callback_progress_bar, 350, 30, 10
+    )
+    progress.run_progressbar()
+
+demo_progress_bar()
+```
+
+### Entry
+```python
+entry(text='', placeholder='', title='', width=330, height=120, timeout=None)
 ```
 >Display a text input
 >
@@ -125,8 +162,9 @@ sgzenity.sgzenity.entry(text='', placeholder='', title='', width=330, height=120
 >_Returns_: The content of the text input
 >_Return type_: str
 
+### Password
 ```python
-sgzenity.sgzenity.password(text='', placeholder='', title='', width=330, height=120, timeout=None)
+password(text='', placeholder='', title='', width=330, height=120, timeout=None)
 ```
 >Display a text input with hidden characters
 >
@@ -142,8 +180,9 @@ sgzenity.sgzenity.password(text='', placeholder='', title='', width=330, height=
 >
 >Return type: str
 
+### List of values
 ```python
-sgzenity.sgzenity.zlist(columns, items, print_columns=None, text='', title='', width=330, height=120, timeout=None)
+zlist(columns, items, print_columns=None, text='', title='', width=330, height=120, timeout=None)
 ```
 >Display a list of values
 >
@@ -162,8 +201,9 @@ sgzenity.sgzenity.zlist(columns, items, print_columns=None, text='', title='', w
 >
 >_Return type_: list
 
+### File selection
 ```python
-sgzenity.sgzenity.file_selection(multiple=False, directory=False, save=False, confirm_overwrite=False, filename=None, title='', width=330, height=120, timeout=None)
+file_selection(multiple=False, directory=False, save=False, confirm_overwrite=False, filename=None, title='', width=330, height=120, timeout=None)
 ```
 >Open a file selection window
 >
@@ -183,8 +223,10 @@ sgzenity.sgzenity.file_selection(multiple=False, directory=False, save=False, co
 >
 >_Return type_: string or list if multiple enabled
 
+### Calendar
+
 ```python
-sgzenity.sgzenity.calendar(text='', day=None, month=None, title='', width=330, height=120, timeout=None)
+calendar(text='', day=None, month=None, title='', width=330, height=120, timeout=None)
 ```
 >Display a calendar
 >
@@ -202,8 +244,10 @@ sgzenity.sgzenity.calendar(text='', day=None, month=None, title='', width=330, h
 > 
 >_Return type_: tuple
 
+### Color selection
+
 ```python
-sgzenity.sgzenity.color_selection(show_palette=False, opacity_control=False, title='', width=330, height=120, timeout=None)
+color_selection(show_palette=False, opacity_control=False, title='', width=330, height=120, timeout=None)
 ```
 
 >Display a color selection dialog
@@ -220,8 +264,10 @@ sgzenity.sgzenity.color_selection(show_palette=False, opacity_control=False, tit
 >
 >_Return type_: str
 
+### Scale
+
 ```python
-sgzenity.sgzenity.scale(text='', value=0, min=0, max=100, step=1, draw_value=True, title='', width=330, height=120, timeout=None)
+scale(text='', value=0, min=0, max=100, step=1, draw_value=True, title='', width=330, height=120, timeout=None)
 ```
 
 >Select a number with a range widget

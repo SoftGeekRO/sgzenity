@@ -26,9 +26,7 @@ def demo_progress_bar():
     progress = progress_bar(
         "DEMO TITLE", "DEMO TEXT", False, callback_progress_bar, 350, 30, 10
     )
-
     progress.run_progressbar()
-
 
 demo_progress_bar()
 
