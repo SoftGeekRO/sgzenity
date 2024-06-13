@@ -6,6 +6,7 @@ from .sgszenity import (
     file_selection,
     message,
     password,
+    progress_bar,
     question,
     scale,
     sglist,
