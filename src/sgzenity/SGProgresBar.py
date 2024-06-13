@@ -69,7 +69,7 @@ class SGProgressBar(Base):
 
         callback = self.callback() if callable(self.callback) else None
         if callback >= 1:
-            time.sleep(.1)
+            time.sleep(0.1)
             self._destroy()
 
         if self.pulse_mode:

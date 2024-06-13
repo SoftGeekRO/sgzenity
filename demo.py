@@ -28,6 +28,7 @@ def demo_progress_bar():
     )
     progress.run_progressbar()
 
+
 demo_progress_bar()
 
 _error = question(
