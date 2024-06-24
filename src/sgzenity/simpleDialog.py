@@ -26,6 +26,7 @@ class SGSimpleDialog(Base):
             message_format=None,
         )
         self.vbox.pack_start(self.dialog, True, True, 0)
+
         self.init_dialog()
 
     def init_dialog(self):

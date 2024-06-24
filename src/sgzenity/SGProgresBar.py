@@ -7,77 +7,129 @@ from functools import partial
 
 from gi.repository import GLib, GObject, Gtk
 
-from .base import Base
 from .thread import WorkerThread
 
+DEFAULT_WIDTH = 300
+DEFAULT_HEIGHT = 60
+BORDER_WIDTH = 10
 
-class SGProgressBar(Base):
 
-    def __init__(self, title, text, pulse_mode=False, callback=None, *args, **kwargs):
+class ProgressBar(Gtk.Window):
+
+    def __init__(
+        self,
+        title,
+        text=None,
+        pulse_mode=True,
+        width=DEFAULT_WIDTH,
+        height=DEFAULT_HEIGHT,
+        border_width=BORDER_WIDTH,
+        parent=None,
+        **kwargs,
+    ):
         super().__init__(**kwargs)
 
         self.title = title
         self.text = text
-        self.show_text = True if self.text else False
         self.pulse_mode = pulse_mode
-        self.callback = callback
+        self.border_width = border_width
+        self.width = width
+        self.height = height
+        self.pulses = 10
+        self._count = 0
+        self.workthread = None
 
-        self.dialog = Gtk.ProgressBar()
-        self.vbox.pack_start(self.dialog, True, True, 0)
+        # Create the GUI
+        vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=6)
+        self.add(vbox)
 
-        self.timeout_id = GLib.timeout_add(50, self.update_progress, None)
+        self.progressbar = Gtk.ProgressBar()
+        vbox.pack_start(self.progressbar, True, True, 0)
 
-        self.init_progressbar()
+        self.timeout_id = GLib.timeout_add(50, self.on_timeout, None)
 
-        # Start the background thread.
-        self.worker = WorkerThread(self)
-        self.worker.start()
+        self.connect("destroy", self.cancel)
 
-    def run_progressbar(self):
-        GObject.threads_init()
-        self.show_all()
-        Gtk.main()
+        self.init()
 
-    def refresh_in_thread(self):
-        GObject.idle_add(self.update_progress)
-
-    def init_progressbar(self):
-        # global config for progress bar
-        self.set_border_width(10)
+    def init(self):
+        self.set_border_width(self.border_width)
         self.set_resizable(False)
         self.set_default_size(self.width, self.height)
 
         if self.pulse_mode:
-            self.dialog.pulse()
+            self.progressbar.pulse()
         else:
-            self.dialog.set_fraction(0.0)
+            self.progressbar.set_fraction(0.0)
 
         if self.title:
             self.set_title(self.title)
 
-        if self.show_text:
-            self.dialog.set_text(self.text)
-            self.dialog.set_show_text(self.show_text)
+        if self.text:
+            self.progressbar.set_text(self.text)
+            self.progressbar.set_show_text(True if self.text else False)
 
-        self.connect("destroy", self._destroy)
+        self.connect("destroy", self.cancel)
 
-    def update_progress(self, progress=None):
-        """
+    def show(self, workthread):
+        """Show loading window.
+        This needs to be called frm Gtk main thread.
 
+        Show the loading dialog just before starting the workthread.
+
+        :param workthread:
         :return:
         """
+        if self.workthread is not None:
+            print(
+                'There is a workthread active. Please call close() or cancel() before starting a new loading event.'
+            )
+            return False
 
-        callback = self.callback() if callable(self.callback) else None
-        if callback >= 1:
-            time.sleep(0.1)
-            self._destroy()
+        if workthread is not None:
+            if not isinstance(workthread, WorkerThread):
+                raise Exception('The thread needs to be a subclass of WorkingThread.')
+            self.workthread = workthread
 
-        if self.pulse_mode:
-            self.dialog.pulse()
-        else:
-            self.dialog.set_fraction(callback)
+        self.show_all()
+
         return False
 
-    def _destroy(self, widget=None):
-        self.worker.done = True
+    def on_timeout(self, progress=None):
+        if self.pulse_mode:
+            self.progressbar.pulse()
+        else:
+            self.progressbar.set_fraction(self._count)
+        return self.pulse_mode
+
+    def heartbeat(self, text=None):
+
+        if self.pulse_mode:
+            return False
+
+        self._count += 0.1
+
+        if text is None:
+            text = '{0:0.1f}%'.format(self._count * 100)
+
+        GLib.idle_add(self.progressbar.set_fraction, self._count)
+        GLib.idle_add(self.progressbar.set_text, text)
+
+    def close(self):
+        """Close the loading window.
+
+        This should be called when the workthread has finished it's work.
+        This can be called outside the Gtk main thread.
+        """
+        self.workthread = None
         Gtk.main_quit()
+
+    def cancel(self, widget=None):
+        """Close the loading window.
+
+        This should be called when the workthread has finished it's work.
+        This can be called outside the Gtk main thread.
+        """
+        if self.workthread is not None:
+            self.workthread.cancel()
+        self.close()

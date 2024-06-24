@@ -1,4 +1,5 @@
 from .sgszenity import (
+    ProgressBar,
     calendar,
     color_selection,
     entry,
@@ -6,7 +7,6 @@ from .sgszenity import (
     file_selection,
     message,
     password,
-    progress_bar,
     question,
     scale,
     sglist,

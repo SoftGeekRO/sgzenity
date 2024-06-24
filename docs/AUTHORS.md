@@ -1,2 +1,5 @@
-Authors\n=======\n\nA huge thanks to all of our contributors:\n
+Authors
+=======
+
+A huge thanks to all of our contributors:
 - Zaharia Constantin 

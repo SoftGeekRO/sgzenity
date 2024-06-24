@@ -2,7 +2,12 @@
 
 ### @TODO:
 - improve the code
-- change the interfaces and reimplement the callback method
+
+
+## Version 0.1.8
+- BRAKE: the mode how the ProgressBar is reimplemented will brake the old code. Use the example from README.md
+- reword on the progress bar and threads. For now seams to work OK
+- small fixes for documentation and added some images
 
 ## Version 0.1.7
 - refactored all the code

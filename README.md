@@ -36,23 +36,6 @@ $ python setup.py install
 
 Simple dialog:
 
-```python
-from src.sgzenity import calendar
-
-result = calendar(title="Awesome Calendar", text="Your birthday ?")
-print(result)
-```
-This code show a calendar dialog :
-
-![dialog_01](docs/img/screen_01.png)
-
-And display the result :
-
-```bash
-$ python test.py
-$ (year=2017, month=6, day=4)
-```
-
 ## API
 
 ### Simple message
@@ -97,6 +80,9 @@ warning(title='', text='', width=330, height=120, timeout=None)
 >* **timeout** (*int*) – close the window after n seconds
 
 ### Question
+
+![basic_dialog_01](docs/img/basic_dialog.png)
+
 ```python
 question(title='', text='', width=330, height=120, timeout=None)
 ```
@@ -114,6 +100,9 @@ question(title='', text='', width=330, height=120, timeout=None)
 >_Return type_: bool
 
 ### Progress Bar
+
+![basic_dialog_01](docs/img/progressbar.png)
+
 ```python
 progress_bar(title, text, pulse_mode, callback)
 ```
@@ -128,21 +117,40 @@ progress_bar(title, text, pulse_mode, callback)
 
 
 ### Demo
+
 ```python
-def callback_progress_bar(fraction=None):
-    global counter
-    counter += 0.01
-    if counter <= _max:
-        return counter
-    return True
+import time
+from sgzenity.thread import WorkerThread
+from sgzenity import ProgressBar
 
-def demo_progress_bar():
-    progress = progress_bar(
-        "DEMO TITLE", "DEMO TEXT", False, callback_progress_bar, 350, 30, 10
-    )
-    progress.run_progressbar()
+class WorkingThread(WorkerThread):
+    def payload(self):
+        loading = self.data
+        steps = 10
+        for s in range(steps):
+            if self.stop:
+                break
+            loading.heartbeat()
+            print('Pulse {}.'.format(s))
+            time.sleep(1)
+        if self.stop:
+            print('Working thread canceled.')
+        else:
+            print('Working thread ended.')
+        loading.close()
 
-demo_progress_bar()
+
+def sg_progress_bar():
+    loading = ProgressBar("DEMO TITLE", "DEMO TEXT", pulse_mode=True)
+
+    workthread = WorkingThread(loading)
+    loading.show(workthread)
+    workthread.start()
+
+    Gtk.main()
+
+
+sg_progress_bar()
 ```
 
 ### Entry
@@ -243,6 +251,15 @@ calendar(text='', day=None, month=None, title='', width=330, height=120, timeout
 >_Returns_: (year, month, day)
 > 
 >_Return type_: tuple
+
+![calendar_dialog_01](docs/img/calendar_dialog.png)
+
+And display the result :
+
+```bash
+$ python demo.py
+$ (year=2017, month=6, day=4)
+```
 
 ### Color selection
 

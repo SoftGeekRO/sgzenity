@@ -1,37 +1,51 @@
 #! /usr/bin/env python3
 # -*- coding:utf-8 -*-
-import random
+
 import time
 
 import gi
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import GLib, Gtk
+from gi.repository import GLib, GObject, Gtk
 
-from src.sgzenity.sgszenity import progress_bar, question
-
-counter = 0
-_max = 1
-
-
-def callback_progress_bar(fraction=None):
-    global counter
-    counter += 0.01
-    if counter <= _max:
-        return counter
-    return True
+from src.sgzenity.SGProgresBar import ProgressBar
+from src.sgzenity.sgszenity import calendar, question
+from src.sgzenity.thread import WorkerThread
 
 
-def demo_progress_bar():
-    progress = progress_bar(
-        "DEMO TITLE", "DEMO TEXT", False, callback_progress_bar, 350, 30, 10
-    )
-    progress.run_progressbar()
+class WorkingThread(WorkerThread):
+    def payload(self):
+        loading = self.data
+        steps = 10
+        for s in range(steps):
+            if self.stop:
+                break
+            loading.heartbeat()
+            print('Pulse {}.'.format(s))
+            time.sleep(1)
+        if self.stop:
+            print('Working thread canceled.')
+        else:
+            print('Working thread ended.')
+        loading.close()
 
 
-demo_progress_bar()
+def sg_progress_bar():
+
+    loading = ProgressBar("DEMO TITLE", "DEMO TEXT", pulse_mode=True)
+
+    workthread = WorkingThread(loading)
+    loading.show(workthread)
+    workthread.start()
+
+    Gtk.main()
+
+
+sg_progress_bar()
 
 _error = question(
     "something went wrong", text="Some big text in small space", height=150, width=400
 )
-# print(_error)
+
+_calendar = calendar("DEMO CALENDAR")
+print(_calendar)

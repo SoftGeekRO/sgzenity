@@ -1,37 +1,16 @@
 #! /usr/bin/env python3
 # -*- coding:utf-8 -*-
 
-from .base import DEFAULT_HEIGHT, DEFAULT_WIDTH, ZLIST_HEIGHT, Gtk
+from .base import DEFAULT_HEIGHT, DEFAULT_WIDTH, ZLIST_HEIGHT, GObject, Gtk
 from .SGCalendar import SGCalendar
 from .SGColorSelection import SGColorSelection
 from .SGEntryMessage import SGEntryMessage
 from .SGEntryPassword import SGEntryPassword
 from .SGFileSection import SGFileSelection
 from .SGList import SGList
-from .SGProgresBar import SGProgressBar
+from .SGProgresBar import ProgressBar
 from .SGScale import SGScale
 from .simpleDialog import SGSimpleDialog
-
-
-def progress_bar(
-    title,
-    text,
-    pulse_mode,
-    callback=None,
-    width=DEFAULT_WIDTH,
-    height=DEFAULT_HEIGHT,
-    timeout=None,
-):
-    progress = SGProgressBar(
-        title,
-        text,
-        pulse_mode,
-        callback,
-        width=width,
-        height=height,
-        timeout=timeout,
-    )
-    return progress
 
 
 def _simple_dialog(dialog_type, text, title, width, height, timeout):
