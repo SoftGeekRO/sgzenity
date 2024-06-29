@@ -2,6 +2,7 @@
 [![PyPI version](https://badge.fury.io/py/sgzenity.svg)](https://badge.fury.io/py/sgzenity)
 [![Merge2Main](https://github.com/SoftGeekRO/sgzenity/actions/workflows/push_to_main.yml/badge.svg?event=push)](https://github.com/SoftGeekRO/sgzenity/actions/workflows/push_to_main.yml)
 [![Publish Python 🐍 distribution 📦 to PyPI and TestPyPI](https://github.com/SoftGeekRO/sgzenity/actions/workflows/publish_to_pypi.yml/badge.svg?event=release)](https://github.com/SoftGeekRO/sgzenity/actions/workflows/publish_to_pypi.yml)
+![PyPI - Downloads](https://img.shields.io/pypi/dm/sgzenity?link=https%3A%2F%2Fpypi.org%2Fproject%2Fsgzenity%2F)
 ![GitHub License](https://img.shields.io/github/license/softgeekRO/sgzenity)
 
 # SGZenity
