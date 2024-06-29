@@ -5,9 +5,10 @@ import time
 
 class WorkerThread(threading.Thread):
 
-    def __init__(self, data=None):
+    def __init__(self, data=None, callback=None):
         threading.Thread.__init__(self)
         self.data = data
+        self.callback = callback
         self.stop = False
 
     def run(self):
